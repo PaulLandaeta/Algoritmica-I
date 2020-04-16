@@ -69,13 +69,14 @@ void generador() {
 }
 int main()
 {
-    input;
     string word;
+    int number = 10;
+    // incrementar antes de imprimir 
+    cout<<++number<<endl;
+    // va imprimir y luego va incrementar
+    cout<<number++<<endl;
 
-
-    generador();
-    while(cin>>word){
-        cout<<celdas[word]<<endl;
-    }
+    // number final 
+    cout<<number<<endl;
     return 0;
 }
