@@ -44,7 +44,8 @@ int main()
     }
 
     //Recorrido por DFS
-
+    // O(V+E)  
+    // O(V^2)
     vector<bool> visitados(nodos);
     stack<int> pilita;
     visitados[1] = true; // empezando desde ricardo 1 pero el vector empieza en 0 por lo cual vamos a restar 1 

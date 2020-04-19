@@ -32,6 +32,8 @@ int main()
 
     vector<bool> visitados(nodos);
     queue<int> colita;
+    // O(V+E) 
+    // O(V^2)
     visitados[1] = true; // empezando desde ricardo 1 pero el vector empieza en 0 por lo cual vamos a restar 1 
     colita.push(1); // agregamos el primer nodo y restamos 1 por que empieza en 0 
     while(!colita.empty()){
