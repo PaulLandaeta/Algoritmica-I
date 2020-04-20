@@ -34,8 +34,11 @@ int main()
     queue<int> colita;
     // O(V+E) 
     // O(V^2)
-    visitados[1] = true; // empezando desde ricardo 1 pero el vector empieza en 0 por lo cual vamos a restar 1 
-    colita.push(1); // agregamos el primer nodo y restamos 1 por que empieza en 0 
+    int nodoActual = 1;
+    visitados[nodoActual] = true; // empezando desde ricardo 1 pero el vector empieza en 0 por lo cual vamos a restar 1 
+    colita.push(nodoActual); // agregamos el primer nodo y restamos 1 por que empieza en 0 
+    vector<int> level(nodos);
+    level[nodoActual] = 0;
     while(!colita.empty()){
         int nodoActual = colita.front();
         colita.pop(); 
@@ -44,6 +47,7 @@ int main()
             if(!visitados[nodoAVisitar]) {
                 colita.push(nodoAVisitar);
                 visitados[nodoAVisitar] = true;
+                level[nodoAVisitar] = level[nodoActual] + 1;
             }
         }
     }
@@ -53,6 +57,7 @@ int main()
     }
 
     if(visitados[7]){
+        cout<<level[7]<<endl;
         cout<<"el amor existe"<<endl;
     } 
     else{
