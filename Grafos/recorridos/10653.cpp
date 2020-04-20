@@ -8,6 +8,9 @@ int level[1010][1010];
 int rows,columns;
 
 void bfs(int initialRow,int initialColumn) {
+    // memset 
+
+
     queue<pair<int,int> > queuePair;
     pair<int, int> initialCell(initialRow, initialColumn); 
     queuePair.push(initialCell);
