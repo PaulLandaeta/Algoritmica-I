@@ -2,13 +2,12 @@
 #define input freopen("in.txt","r",stdin)
 #define output freopen("out.txt","w",stdout)
 using namespace std;  
-int grafo[1010][1010];
 bool visitado[1010][1010];
 int level[1010][1010];
 int rows,columns;
 
 void bfs(int initialRow,int initialColumn) {
-    // memset 
+   
 
 
     queue<pair<int,int> > queuePair;
@@ -58,6 +57,7 @@ int main() {
         if(rows==0 && columns==0) {
             break;
         }
+         // memset visitado = false level = 0
         int rowsBombs; 
         cin>>rowsBombs;
         for(int j=0 ; j<rowsBombs; j++) {
