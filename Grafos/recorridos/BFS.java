@@ -31,14 +31,14 @@ public class BFS {
 			edgeOne = scanner.nextInt();
 			edgeTwo = scanner.nextInt();
 			graph[edgeOne].add(edgeTwo);
-			graph[edgeTwo].add(edgeOne);
+			//graph[edgeTwo].add(edgeOne);
 		}
 		
 		//Print Graph 
 		for(int i = 0; i< edges; i++) {
 			System.out.print("Edge {"+i+"} => ");
 			for(int j = 0; j < graph[i].size(); j++ ) {
-				System.out.print("["+graph[i].get(j)+"]");
+				System.out.print("["+graph[i].get(j)+"]");  // grafo[i][j]
 			}	
 			System.out.println();
 		}
@@ -47,16 +47,21 @@ public class BFS {
 		//Create the queue to save the next edges. 
 		Queue<Integer> edgeQueue = new LinkedList<Integer>();
  		boolean[]	edgeVisited = new boolean[edges];
+ 		int[] level = new int[edges];
  		
  		//insert the first edge. 
  		edgeVisited[0] = true;
- 		edgeQueue.add(0);
+ 		
+ 		int initialEdge = 0;
+ 		level[initialEdge] = 1;
+ 		edgeQueue.add(initialEdge);
  		
  		while(!edgeQueue.isEmpty()) {
  			int currentEdge = edgeQueue.remove();
  			for(int i=0;i<graph[currentEdge].size();i++) {
  				if(!edgeVisited[graph[currentEdge].get(i)]) {
  					edgeVisited[graph[currentEdge].get(i)] = true;
+ 					level[graph[currentEdge].get(i)] = level[currentEdge] + 1;
  					edgeQueue.add(graph[currentEdge].get(i));
  				}
  			}
