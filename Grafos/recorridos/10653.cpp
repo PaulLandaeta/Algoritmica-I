@@ -57,7 +57,9 @@ int main() {
         if(rows==0 && columns==0) {
             break;
         }
-         // memset visitado = false level = 0
+         // memset visitado = false
+         //   memset(visitados, false, sizeof(visitados));
+         //   memset(level, 0, sizeof(level)); 
         int rowsBombs; 
         cin>>rowsBombs;
         for(int j=0 ; j<rowsBombs; j++) {
