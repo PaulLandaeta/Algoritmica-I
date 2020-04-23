@@ -1,79 +1,75 @@
 #include <bits/stdc++.h> 
 #define input freopen("in.txt","r",stdin)
 #define output freopen("out.txt","w",stdout)
-using namespace std;  
-bool visitado[1010][1010];
-int level[1010][1010];
-int r,c;
+using namespace std; 
+vector<int> grafog[30];
+int level[30];
+int visitados[30];
 
-void bfs(int initialRow,int initialColumn) {
-
-    queue<pair<int,int> > queuePair;
-    pair<int, int> initialCell(initialRow, initialColumn); 
-    queuePair.push(initialCell);
-    visitado[initialRow][initialColumn] = true;
-    level[initialRow][initialColumn] = 0;
-    while(!queuePair.empty()){
-        pair<int,int> currentCell = queuePair.front();
-        queuePair.pop();
-       
-        if(currentCell.first+1 < r && !visitado[currentCell.first+1][currentCell.second]){
-            visitado[currentCell.first+1][currentCell.second] = true;
-            pair<int, int> vecino(currentCell.first+1, currentCell.second); 
-            queuePair.push(vecino);
-            level[vecino.first][vecino.second] = level[currentCell.first][currentCell.second] + 1;
+void bfs(int beg){
+    memset(level,0,sizeof(level));
+    memset(visitados,0,sizeof(visitados));    
+    queue<int> colita; 
+    int nodoActual = beg;
+    visitados[nodoActual] = true; 
+    colita.push(nodoActual); 
+    level[nodoActual] = 0;
+    while(!colita.empty()){
+        int nodoActual = colita.front();
+        colita.pop(); 
+        for(int i=0;i<grafog[nodoActual].size();i++) {
+            int nodoAVisitar = grafog[nodoActual][i];  
+            if(!visitados[nodoAVisitar]) {
+                colita.push(nodoAVisitar);
+                visitados[nodoAVisitar] = true;
+                level[nodoAVisitar] = level[nodoActual] + 1;
+            }
         }
-
-        if(currentCell.first-1 >= 0 && !visitado[currentCell.first-1][currentCell.second]){
-            visitado[currentCell.first-1][currentCell.second] = true;
-            pair<int, int> vecino(currentCell.first-1, currentCell.second); 
-            queuePair.push(vecino);
-            level[vecino.first][vecino.second] = level[currentCell.first][currentCell.second] + 1;
-        }
-
-        if(currentCell.second+1 < c && !visitado[currentCell.first][currentCell.second+1]){
-            visitado[currentCell.first][currentCell.second+1] = true;
-            pair<int, int> vecino(currentCell.first, currentCell.second+1); 
-            queuePair.push(vecino);
-            level[vecino.first][vecino.second] = level[currentCell.first][currentCell.second] + 1;
-        }
-
-        if(currentCell.second-1 >=0 && !visitado[currentCell.first][currentCell.second-1]){
-            visitado[currentCell.first][currentCell.second-1] = true;
-            pair<int, int> vecino(currentCell.first, currentCell.second-1); 
-            queuePair.push(vecino);
-            level[vecino.first][vecino.second] = level[currentCell.first][currentCell.second] + 1;
-        }
-    } 
-
+    }
 }
 
-int main() {
+int main(){
     input;
+    int nodo;
+    int edge;
+    int now;
+    int cas=0;
     
-    while(cin>>r>>c){
-        if(r==0 && c==0) {
-            break;
+    while(cin>>nodo){
+        for(int i=0;i<=20;i++) {
+            grafog[i].clear();
         }
-        memset(visitado,0,sizeof(visitado));
-        memset(level,0,sizeof(level));
-
-        int rowsBombs; 
-        cin>>rowsBombs;
-        for(int j=0 ; j<rowsBombs; j++) {
-            int currentRow,numberBomb;
-            cin>>currentRow>>numberBomb;
-            for(int i=0;i<numberBomb;i++) {
-                int currentColumn; 
-                cin>>currentColumn;
-                visitado[currentRow][currentColumn] = true;
+        
+       
+        for(int i=0; i<nodo; i++){
+            cin>>edge; 
+            grafog[1].push_back(edge);
+            grafog[edge].push_back(1);
+        }
+        for(int i=2; i<=19; i++){
+            cin>>now;
+            for(int j=0; j<now; j++){
+                cin>>edge; 
+                grafog[i].push_back(edge);
+                grafog[edge].push_back(i);
             }
-        }   
-
-        int initialRow, initialColumn, finalRow, finalColumn; 
-        cin>>initialRow>>initialColumn>>finalRow>>finalColumn;
-        bfs(initialRow,initialColumn);
-        cout<<level[finalRow][finalColumn]<<endl;
+        }
+        
+        int many;
+        cin>>many;
+        cas++;
+        cout<<"Test Case #"<<cas<<endl;
+        for(int i=0;i<many;i++){
+            
+            int beg;
+            int end;
+            cin>>beg>>end;
+            bfs(beg);
+            cout<<beg<<" to "<<end<<" : "<<level[end]<<endl;
+        }
+        
+        cout<<endl;
+        
+        
     }
-    return 0;
 }

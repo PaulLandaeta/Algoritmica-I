@@ -38,12 +38,12 @@ int main() {
         for(int i=0;i<n;i++) {
             for(int j = 0; j<n; j++) {
                 if(graph[i][j]=='1') {
+                    map[graph[i][j]]++;
                    dfs(i,j);
                    cont2++;
                 }
             }
         }
-        
         cout<<"Image number "<<++cases<<" contains "<<cont2<<" war eagles."<<endl;
        
     }
