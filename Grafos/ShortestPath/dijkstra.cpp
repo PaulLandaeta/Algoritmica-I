@@ -11,13 +11,13 @@ vector<pair< int , int > > v[SIZE];   // each vertex has all the connected verti
 int dist [SIZE];
 bool vis [SIZE];
 
-void dijkstra(){
-    memset(dist, INF , sizeof vis);            // set the vertices distances as infinity
+void dijkstra(int initialNode){
+    memset(dist, INF , sizeof dist);            // set the vertices distances as infinity
     memset(vis, false , sizeof vis);            // set all vertex as unvisited
-    dist[1] = 0;
+    dist[initialNode] = 0;
     multiset < pair < int , int > > s;          // multiset do the job as a min-priority queue
 
-    s.insert(make_pair(0 , 1));                          // insert the source node with distance = 0
+    s.insert(make_pair(0 , initialNode));                          // insert the source node with distance = 0
 
     while(!s.empty()){
 
@@ -28,21 +28,35 @@ void dijkstra(){
         if( vis[x] ) {
             continue;                  // check if the popped vertex is visited before
         }
-         vis[x] = true;
+        vis[x] = true;
 
         for(int i = 0; i < v[x].size(); i++){
-            int e = v[x][i].first; 
-            int w = v[x][i].second;
-            if(dist[x] + w < dist[e]  ){            // check if the next vertex distance could be minimized
-                dist[e] = dist[x] + w;
-                s.insert(make_pair(dist[e],  e) );           // insert the next vertex with the updated distance
+            int edge = v[x][i].second; 
+            int weight = v[x][i].first;
+            if(dist[x] + weight < dist[edge]  ){            // check if the next vertex distance could be minimized
+                dist[edge] = dist[x] + weight;
+                s.insert(make_pair(dist[edge],  edge) );           // insert the next vertex with the updated distance
             }
         }
     }
 }
 
 int main() {
-    cout<<"it's ok?"<<endl;
+    input;
+    int n,m;
+    cin>>n>>m; 
+    for(int i=0;i<m;i++) {
+        int a,b,peso;
+        cin>>a>>b>>peso;
+        v[a].push_back(make_pair(peso,b));
+        v[b].push_back(make_pair(peso,a));
+    }
+    dijkstra(1);
+
+    for(int i=1;i<=n;i++) {
+        cout<<"["<<dist[i]<<"]";
+    }    
+
 
     return 0;
 }
