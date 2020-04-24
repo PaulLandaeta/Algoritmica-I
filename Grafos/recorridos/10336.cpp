@@ -42,8 +42,8 @@ int main() {
          cin>>graph[i];
      }
      vector<pair<char,int> > solution; 
-     for(int i='a'; i<='z' ;i++) {
-         pair<char,int> abcedario((char)(i),0);
+     for(int i = 97; i<= 123 ;i++) {
+         pair<char,int> abcedario((char)(i),0); // a 0    b 0  c 0 .... z 0
          solution.push_back(abcedario);
      }
      for(int i=0;i<n;i++) {
