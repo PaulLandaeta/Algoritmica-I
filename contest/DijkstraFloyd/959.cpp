@@ -68,7 +68,7 @@ void dijkstra(int initialRow, int initialColumn)
 
 int main()
 {
-    input;
+    //input;
 
     int cases;
     cin >> cases;
