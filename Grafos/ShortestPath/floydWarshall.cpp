@@ -16,10 +16,7 @@ void floydWarshall(){
     for(int pivot = 1; pivot<= n ; pivot++){
         for(int i=1;i<=n;i++) {
             for(int j=1;j<=n;j++) {
-                if(graph[i][pivot]!=INF && graph[pivot][j]!=INF) {
-                    graph[i][j] = min(graph[i][j],(graph[i][pivot]+graph[pivot][j]));
-                }
-                
+               graph[i][j] = min(graph[i][j],(graph[i][pivot]+graph[pivot][j]));
             }
         }
     }
