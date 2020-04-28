@@ -42,6 +42,6 @@ int main()
                 break;
             }
         }
-        cout << "Case " << cases++ << ": " << result << endl;
+       
     }
 }
