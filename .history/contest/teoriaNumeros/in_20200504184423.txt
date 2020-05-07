@@ -1,0 +1,20 @@
+7 9 
+Reno Chicago
+Boston Chicago 
+Chicago Miami
+Boston Denver
+Denver 
+
+Reno (1)
+Denver (2)
+Chicago (3)
+Boston (4)
+Atlanta (5)
+Houston (6)
+Miami (7) 
+
+2 – 4 
+2 – 1 
+7 4
+6 5 
+5 6  
