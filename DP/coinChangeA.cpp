@@ -69,6 +69,7 @@ void coinChangeDP2()
     { // T
         for (int T = 1; T < MAX; T++)
         {
+
             if (T - coins[i] >= 0)
             {
                 dp[i][T] = min(dp[i - 1][T], 1 + dp[i][T - coins[i]]);
@@ -76,6 +77,40 @@ void coinChangeDP2()
             else
             {
                 dp[i][T] = dp[i - 1][T];
+            }
+        }
+    }
+}
+
+void coinChangeDP3()
+{
+    // coins (3,5,6)
+    //        0 1 2
+    for (int i = 0; i < coins.size(); i++)
+    { // T
+        for (int T = 1; T < MAX; T++)
+        {
+            if (i - 1 >= 0)
+            {
+                if (T - coins[i] >= 0)
+                {
+                    dp[i][T] = min(dp[i - 1][T], 1 + dp[i][T - coins[i]]);
+                }
+                else
+                {
+                    dp[i][T] = dp[i - 1][T];
+                }
+            }
+            else
+            {
+                if (T - coins[i] >= 0)
+                {
+                    dp[i][T] = 1 + dp[i][T - coins[i]];
+                }
+                else
+                {
+                    dp[i][T] = INF;
+                }
             }
         }
     }
@@ -95,6 +130,7 @@ int main()
         coins.push_back(coinValue);
     }
     long long minimo = INF;
+    memset(dp, 0, sizeof(dp));
     //cleanDP();
     /*memset(dp, -1, sizeof(dp));
 
@@ -110,7 +146,7 @@ int main()
     }
     */
 
-    coinChangeDP2();
+    coinChangeDP3();
     cout << dp[numberCoins - 1][T] << endl;
 
     return 0;
